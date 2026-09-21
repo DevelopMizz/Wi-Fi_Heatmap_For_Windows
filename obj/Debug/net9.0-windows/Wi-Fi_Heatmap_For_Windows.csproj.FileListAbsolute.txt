@@ -1,0 +1,15 @@
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\bin\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.exe
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\bin\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.deps.json
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\bin\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.runtimeconfig.json
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\bin\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.dll
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\bin\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.pdb
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.AssemblyInfoInputs.cache
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.AssemblyInfo.cs
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.csproj.CoreCompileInputs.cache
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.sourcelink.json
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.dll
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\refint\Wi-Fi_Heatmap_For_Windows.dll
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.pdb
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\Wi-Fi_Heatmap_For_Windows.genruntimeconfig.cache
+C:\Users\Josh\Code\Wi-Fi_Heatmap_For_Windows\obj\Debug\net9.0-windows\ref\Wi-Fi_Heatmap_For_Windows.dll
