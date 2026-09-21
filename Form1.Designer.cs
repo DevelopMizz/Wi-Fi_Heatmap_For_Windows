@@ -1,4 +1,4 @@
-﻿namespace Wi_Fi_Heatmap_For_Windows;
+﻿namespace WiFiServayTool;
 
 partial class Form1
 {
