@@ -11,7 +11,7 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Wi-Fi_Heatmap_For_Windows")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffcae5be3666702eabbc6b3e915187ad9a03414e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Wi-Fi_Heatmap_For_Windows")]

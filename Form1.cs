@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using WiFiServayTool.Models;
 
@@ -11,6 +12,8 @@ public partial class Form1 : Form
     private readonly List<SignalMeasurement> _measurements = new();
 
     private readonly Button _loadButton;
+    private readonly Button _saveButton;
+    private readonly Panel _toolbarPanel;
 
     private readonly SurveyService _surveyService = new();
 
@@ -22,16 +25,37 @@ public partial class Form1 : Form
 
         DoubleBuffered = true;
 
-        _loadButton = new Button
+        _toolbarPanel = new Panel
         {
-            Text = "Load Floorplan",
             Dock = DockStyle.Top,
             Height = 40
         };
 
-        _loadButton.Click += LoadButton_Click;
+        _loadButton = new Button
+        {
+            Text = "Load Floorplan",
+            Width = 120,
+            Height = 30,
+            Left = 5,
+            Top = 5
+        };
 
-        Controls.Add(_loadButton);
+        _saveButton = new Button
+        {
+            Text = "Save Survey",
+            Width = 120,
+            Height = 30,
+            Left = 130,
+            Top = 5
+        };
+
+        _loadButton.Click += LoadButton_Click;
+        _saveButton.Click += SaveButton_Click;
+
+        _toolbarPanel.Controls.Add(_loadButton);
+        _toolbarPanel.Controls.Add(_saveButton);
+
+        Controls.Add(_toolbarPanel);
 
         MouseClick += Form1_MouseClick;
     }
@@ -45,14 +69,119 @@ public partial class Form1 : Form
 
         if (dialog.ShowDialog() == DialogResult.OK)
         {
-            _floorplan = Image.FromFile(dialog.FileName);
+            _floorplan?.Dispose();
+
+            using Image temp = Image.FromFile(dialog.FileName);
+            _floorplan = new Bitmap(temp);
+
+            _measurements.Clear();
+
             Invalidate();
+        }
+    }
+
+    private void SaveButton_Click(object? sender, EventArgs e)
+    {
+        if (_floorplan is null)
+        {
+            MessageBox.Show(
+                "No floorplan loaded.",
+                "Save Survey",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+
+            return;
+        }
+
+        using SaveFileDialog dialog = new()
+        {
+            Filter = "PNG Image (*.png)|*.png",
+            DefaultExt = "png",
+            FileName = "WiFiSurvey.png"
+        };
+
+        if (dialog.ShowDialog() != DialogResult.OK)
+            return;
+
+        try
+        {
+            using Bitmap bitmap = new(
+                ClientSize.Width,
+                ClientSize.Height - _toolbarPanel.Height);
+
+            using Graphics graphics =
+                Graphics.FromImage(bitmap);
+
+            graphics.Clear(Color.White);
+
+            graphics.DrawImage(
+                _floorplan,
+                new Rectangle(
+                    0,
+                    0,
+                    bitmap.Width,
+                    bitmap.Height));
+
+            foreach (SignalMeasurement measurement in _measurements)
+            {
+                using SolidBrush brush =
+                    new(GetSignalColour(
+                        measurement.SignalStrengthDbm));
+
+                int x = (int)measurement.X;
+                int y = (int)measurement.Y - _toolbarPanel.Height;
+
+                graphics.FillEllipse(
+                    brush,
+                    x - 20,
+                    y - 20,
+                    40,
+                    40);
+
+                graphics.DrawEllipse(
+                    Pens.Black,
+                    x - 20,
+                    y - 20,
+                    40,
+                    40);
+
+                graphics.DrawString(
+                    $"{measurement.SignalStrengthDbm} dBm",
+                    Font,
+                    Brushes.Black,
+                    x + 25,
+                    y - 10);
+            }
+
+            bitmap.Save(
+                dialog.FileName,
+                ImageFormat.Png);
+
+            MessageBox.Show(
+                "Survey saved successfully.",
+                "Save Survey",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                ex.Message,
+                "Save Failed",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
         }
     }
 
     private void Form1_MouseClick(object? sender, MouseEventArgs e)
     {
         if (e.Button != MouseButtons.Left)
+            return;
+
+        if (_floorplan is null)
+            return;
+
+        if (e.Y < _toolbarPanel.Bottom)
             return;
 
         try
@@ -86,9 +215,9 @@ public partial class Form1 : Form
                 _floorplan,
                 new Rectangle(
                     0,
-                    _loadButton.Bottom,
+                    _toolbarPanel.Bottom,
                     ClientSize.Width,
-                    ClientSize.Height - _loadButton.Height));
+                    ClientSize.Height - _toolbarPanel.Bottom));
         }
 
         foreach (SignalMeasurement measurement in _measurements)
